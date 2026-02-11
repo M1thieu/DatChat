@@ -1,0 +1,55 @@
+name: Release Web
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version label (e.g. v0.1.0-test1)"
+        required: true
+        default: "v0.1.0-test"
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build-and-package:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Build client
+        run: npm run build --workspace client
+
+      - name: Package web zip
+        shell: pwsh
+        run: |
+          $version = "${{ github.event.inputs.version }}"
+          if ([string]::IsNullOrWhiteSpace($version)) {
+            $version = "${{ github.ref_name }}"
+          }
+          ./scripts/create-web-release.ps1 -Version $version -SkipBuild
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: datchat-web-release
+          path: artifacts/*.zip
+
+      - name: Create GitHub Release (tags only)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/*.zip
+          generate_release_notes: true

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bun:*)",
+      "Bash(npx supabase --version)",
+      "Bash(node --version:*)",
+      "Bash(npm install:*)",
+      "Bash(powershell:*)"
+    ]
+  }
+}

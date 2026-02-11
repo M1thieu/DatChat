@@ -1,0 +1,17 @@
+{
+  "name": "datchat",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "bun run --filter './packages/client' dev",
+    "build": "bun run --filter './packages/client' build",
+    "lint:client": "npm run lint --workspace client",
+    "build:client": "npm run build --workspace client",
+    "release:web": "powershell -ExecutionPolicy Bypass -File ./scripts/create-web-release.ps1",
+    "db:migrate": "cd supabase && supabase db push",
+    "db:reset": "cd supabase && supabase db reset",
+    "db:types": "supabase gen types typescript --local > packages/shared/src/database.types.ts"
+  }
+}
