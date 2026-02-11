@@ -16,6 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      VITE_SUPABASE_URL: https://bswpvsynswfbaikfohhi.supabase.co
+      VITE_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJzd3B2c3luc3dmYmFpa2ZvaGhpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA3Njg1MDUsImV4cCI6MjA4NjM0NDUwNX0.LrYt_BW9Y2Z1VaHpWTphFXfyWMnDBnAfKUjzpgRGFUE
     steps:
       - name: Checkout
         uses: actions/checkout@v4
