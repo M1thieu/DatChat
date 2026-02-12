@@ -6,6 +6,10 @@ Date: 2026-02-11
 
 Build a mature V2 that mirrors Element's structure and product depth as closely as practical, while shipping a stable path from current DatChat.
 
+Related planning docs:
+- `CORE_SCOPE_V1.md`
+- `BACKEND_TRANSITION_STRATEGY.md`
+
 ## Decision: Fork Path vs Reinvent Path
 
 ### Option 1 (Recommended for your stated goal): True Element fork path
